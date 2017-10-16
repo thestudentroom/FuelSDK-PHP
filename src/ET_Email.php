@@ -1,7 +1,6 @@
 <?php
-spl_autoload_register( function($class_name) {
-    include_once 'src/'.$class_name.'.php';
-});
+
+namespace MarketingCloud;
 
 /**
 * ET_Email - Represents an email in a Marketing Cloud account.
@@ -23,4 +22,3 @@ class ET_Email extends ET_CUDSupport
 		$this->folderMediaType = "email";
 	}
 }
-?>

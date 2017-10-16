@@ -1,7 +1,6 @@
 <?php
-spl_autoload_register( function($class_name) {
-    include_once 'src/'.$class_name.'.php';
-});
+
+namespace MarketingCloud;
 
 /**
  * This class represents the POST operation for SOAP service.
@@ -58,4 +57,3 @@ class ET_Post extends ET_Constructor
 		}			
 	}
 }
-?>

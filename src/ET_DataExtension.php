@@ -1,7 +1,6 @@
 <?php
-spl_autoload_register( function($class_name) {
-    include_once 'src/'.$class_name.'.php';
-});
+
+namespace MarketingCloud;
 
 /**
 * ETDataExtension - Represents a data extension within an account.
@@ -71,4 +70,3 @@ class ET_DataExtension extends ET_CUDSupport
 		return $response;
 	}
 }
-?>

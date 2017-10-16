@@ -1,4 +1,7 @@
 <?php
+
+namespace MarketingCloud;
+
 /**
  * This class represents the contructor for all web service (SOAP/REST) operation and holds HTTP status code, response, result, etc.
  */
@@ -63,4 +66,3 @@ class ET_Constructor
 		}
 	}
 }
-?>

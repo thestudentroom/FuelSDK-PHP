@@ -1,7 +1,6 @@
 <?php
-spl_autoload_register( function($class_name) {
-    include_once 'src/'.$class_name.'.php';
-});
+
+namespace MarketingCloud;
 
 /**
  * This class represents the GET operation for REST service.
@@ -21,4 +20,3 @@ class ET_GetRest extends ET_Constructor
 		parent::__construct($restResponse->body, $restResponse->httpcode, true);
 	}
 }
-?>

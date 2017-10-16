@@ -1,7 +1,6 @@
 <?php
-spl_autoload_register( function($class_name) {
-    include_once 'src/'.$class_name.'.php';
-});
+
+namespace MarketingCloud;
 
 /** 
 * Represents a program in an account
@@ -18,4 +17,3 @@ class ET_Campaign extends ET_CUDSupportRest
 		$this->urlPropsRequired = array();
 	}
 }
-?>

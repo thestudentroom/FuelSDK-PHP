@@ -1,7 +1,6 @@
 <?php
-spl_autoload_register( function($class_name) {
-    include_once 'src/'.$class_name.'.php';
-});
+
+namespace MarketingCloud;
 
 /**
 * Defines a triggered send in the account.
@@ -38,4 +37,3 @@ class ET_TriggeredSend extends ET_CUDSupport
 		return $response;
 	}
 }
-?>

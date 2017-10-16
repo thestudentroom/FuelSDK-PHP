@@ -1,7 +1,6 @@
 <?php
-spl_autoload_register( function($class_name) {
-    include_once 'src/'.$class_name.'.php';
-});
+
+namespace MarketingCloud;
 
 /**
 * ETDataExtensionColumn - Represents Data Extension Field.
@@ -40,4 +39,3 @@ class ET_DataExtension_Column extends ET_GetSupport
 		return $response;
 	}
 }
-?>

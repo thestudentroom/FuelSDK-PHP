@@ -1,7 +1,6 @@
 <?php
-spl_autoload_register( function($class_name) {
-    include_once 'src/'.$class_name.'.php';
-});
+
+namespace MarketingCloud;
 
 /**
  * This class defines a reusable pattern of import options.
@@ -66,4 +65,3 @@ class ET_Import extends ET_CUDSupport
 		return $response;
 	}
 }
-?>

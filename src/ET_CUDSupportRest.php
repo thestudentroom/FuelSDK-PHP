@@ -1,7 +1,8 @@
 <?php
-spl_autoload_register( function($class_name) {
-    include_once 'src/'.$class_name.'.php';
-});
+
+namespace MarketingCloud;
+
+use Exception;
 
 /**
  * This class represents the create, update, delete operation for REST service.
@@ -120,4 +121,3 @@ class ET_CUDSupportRest extends ET_GetSupportRest
 		return $response;
 	}
 }
-?>

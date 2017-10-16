@@ -1,7 +1,6 @@
 <?php
-spl_autoload_register( function($class_name) {
-    include_once 'src/'.$class_name.'.php';
-});
+
+namespace MarketingCloud;
 
 /**
 *  Represents ClickEvent Class.
@@ -23,4 +22,3 @@ class ET_ClickEvent extends ET_GetSupport
 		$this->getSinceLastBatch = true;
 	}
 }
-?>

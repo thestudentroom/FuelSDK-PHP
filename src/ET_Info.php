@@ -1,7 +1,6 @@
 <?php
-spl_autoload_register( function($class_name) {
-    include_once 'src/'.$class_name.'.php';
-});
+
+namespace MarketingCloud;
 
 /**
  * This class Provides info about a object like Campaign, Asset, DataExtension, etc.
@@ -44,4 +43,3 @@ class ET_Info extends ET_Constructor
 		}		
 	}
 }
-?>

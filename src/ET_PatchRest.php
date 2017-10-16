@@ -1,7 +1,6 @@
 <?php
-spl_autoload_register( function($class_name) {
-    include_once 'src/'.$class_name.'.php';
-});
+
+namespace MarketingCloud;
 
 /**
  * This class represents the PATCH operation for REST service.
@@ -20,4 +19,3 @@ class ET_PatchRest extends ET_Constructor
 		parent::__construct($restResponse->body, $restResponse->httpcode, true);							
 	}
 }
-?>

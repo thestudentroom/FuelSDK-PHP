@@ -1,7 +1,9 @@
 <?php
-spl_autoload_register( function($class_name) {
-    include_once 'src/'.$class_name.'.php';
-});
+
+namespace MarketingCloud;
+
+use stdClass;
+
 /**
  *	An asset is an instance of any kind of content in the CMS.
  */
@@ -68,4 +70,3 @@ class ET_Asset extends ET_CUDSupportRest
 		return null;
 	}
 }
-?>

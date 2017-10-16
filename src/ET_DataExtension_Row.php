@@ -1,7 +1,8 @@
 <?php
-spl_autoload_register( function($class_name) {
-    include_once 'src/'.$class_name.'.php';
-});
+
+namespace MarketingCloud;
+
+use Exception;
 
 /**
 * ETDataExtensionRow - Represents Data Extension Row.
@@ -149,4 +150,3 @@ class ET_DataExtension_Row extends ET_CUDWithUpsertSupport
 		}		
 	}	
 }
-?>

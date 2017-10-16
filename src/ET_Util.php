@@ -1,4 +1,9 @@
 <?php
+
+namespace MarketingCloud;
+
+use stdClass;
+
 /**
 *  This utility class performs all the REST operation over CURL.
 */
@@ -264,4 +269,3 @@ class ET_Util
     }
 
 }
-?>

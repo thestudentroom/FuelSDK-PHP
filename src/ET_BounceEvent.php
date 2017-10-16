@@ -1,7 +1,7 @@
 <?php
-spl_autoload_register( function($class_name) {
-    include_once 'src/'.$class_name.'.php';
-});
+
+namespace MarketingCloud;
+
 /**
  *	Contains information pertaining to the specific event of an email message bounce.
  */
@@ -21,4 +21,3 @@ class ET_BounceEvent extends ET_GetSupport
 		$this->getSinceLastBatch = true;
 	}
 }
-?>

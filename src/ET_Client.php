@@ -1,17 +1,17 @@
 <?php
-require __DIR__ . '/../vendor/autoload.php';
 
-use \RobRichards\WsePhp\WSSESoap;
-use \Firebase\JWT;
-/**
- * Auto load method to load dependent classes
- */
-spl_autoload_register( 
-	function($class_name) 
-	{
-		include_once 'src/'.$class_name.'.php';
-	}
-);
+namespace MarketingCloud;
+
+use SoapClient;
+use DateTime;
+use DateInterval;
+use stdClass;
+use DOMDocument;
+use DOMXPath;
+
+use RobRichards\WsePhp\WSSESoap;
+use Firebase\JWT;
+
 /**
 * Defines a Client interface class which manages the authentication process.
 * This is the main client class which performs authentication, obtains auth token, if expired refresh auth token.
@@ -743,5 +743,3 @@ class ET_Client extends SoapClient
 	}
 	
 }
-
-?>

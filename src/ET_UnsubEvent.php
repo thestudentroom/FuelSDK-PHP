@@ -1,7 +1,6 @@
 <?php
-spl_autoload_register( function($class_name) {
-    include_once 'src/'.$class_name.'.php';
-});
+
+namespace MarketingCloud;
 
 /**
 * Contains information regarding a specific unsubscription action taken by a subscriber.
@@ -22,4 +21,3 @@ class ET_UnsubEvent extends ET_GetSupport
 		$this->getSinceLastBatch = true;
 	}
 }
-?>

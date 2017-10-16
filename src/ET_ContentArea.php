@@ -1,7 +1,6 @@
 <?php
-spl_autoload_register( function($class_name) {
-    include_once 'src/'.$class_name.'.php';
-});
+
+namespace MarketingCloud;
 
 /**
  * ET_ContentArea - Represents a ContentArea class.
@@ -25,4 +24,3 @@ class ET_ContentArea extends ET_CUDSupport
 		$this->folderMediaType = "content";
 	}
 }
-?>

@@ -1,4 +1,7 @@
 <?php
+
+namespace MarketingCloud;
+
 /**
  * This class represents the base object for REST operation.
  */
@@ -34,4 +37,3 @@ class ET_BaseObjectRest
      * @var      string[]    $urlPropsRequired array of string having only required fields*/
     protected $urlPropsRequired;
 }
-?>

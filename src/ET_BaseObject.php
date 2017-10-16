@@ -1,5 +1,7 @@
-
 <?php
+
+namespace MarketingCloud;
+
 /**
  * This class represents the base object for SOAP operation.
  */
@@ -34,4 +36,3 @@ class ET_BaseObject
     */
     protected $lastRequestID;
 }
-?>

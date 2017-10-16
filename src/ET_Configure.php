@@ -1,7 +1,9 @@
 <?php
-spl_autoload_register( function($class_name) {
-    include_once 'src/'.$class_name.'.php';
-});
+
+namespace MarketingCloud;
+
+use SoapVar;
+
 /**
  * This class represents configurations required for SOAP operation.
  */
@@ -50,4 +52,3 @@ class ET_Configure extends ET_Constructor
 		}
 	}
 }
-?>

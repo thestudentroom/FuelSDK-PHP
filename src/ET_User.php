@@ -1,7 +1,6 @@
 <?php
-spl_autoload_register( function($class_name) {
-    include_once 'src/'.$class_name.'.php';
-});
+
+namespace MarketingCloud;
 
 /**
  * This class represents an Account User.
@@ -16,4 +15,3 @@ class ET_User extends ET_CUDSupport
 		$this->obj = "AccountUser";
 	}
 }
-?>

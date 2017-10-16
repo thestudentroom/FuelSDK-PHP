@@ -1,7 +1,9 @@
 <?php
-spl_autoload_register( function($class_name) {
-    include_once 'src/'.$class_name.'.php';
-});
+
+namespace MarketingCloud;
+
+use stdClass;
+use SoapVar;
 
 /**
  * This class represents the GET operation for SOAP service.
@@ -103,4 +105,3 @@ class ET_Get extends ET_Constructor
 		}	
 	}
 }
-?>

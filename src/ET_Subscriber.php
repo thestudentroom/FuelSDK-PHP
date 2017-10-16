@@ -1,7 +1,6 @@
 <?php
-spl_autoload_register( function($class_name) {
-    include_once 'src/'.$class_name.'.php';
-});
+
+namespace MarketingCloud;
 
 /**
  * A person subscribed to receive email or SMS communication.
@@ -16,4 +15,3 @@ class ET_Subscriber extends ET_CUDWithUpsertSupport
 		$this->obj = "Subscriber";
 	}	
 }
-?>

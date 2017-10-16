@@ -1,7 +1,6 @@
 <?php
-spl_autoload_register( function($class_name) {
-    include_once 'src/'.$class_name.'.php';
-});
+
+namespace MarketingCloud;
 
 /**
  * The class can create and retrieve specific tenant.
@@ -34,4 +33,3 @@ class ET_OEM_Client extends ET_Client
 		return new ET_GetRest($this, $completeURL, $queryString);
 	}
 }
-?>

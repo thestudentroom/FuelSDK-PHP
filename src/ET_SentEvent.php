@@ -1,7 +1,6 @@
 <?php
-spl_autoload_register( function($class_name) {
-    include_once 'src/'.$class_name.'.php';
-});
+
+namespace MarketingCloud;
 
 /**
 * Contains tracking data related to a send, including information on individual subscribers.
@@ -22,4 +21,3 @@ class ET_SentEvent extends ET_GetSupport
 		$this->getSinceLastBatch = true;
 	}
 }
-?>

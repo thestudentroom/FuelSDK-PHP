@@ -1,7 +1,6 @@
 <?php
-spl_autoload_register( function($class_name) {
-    include_once 'src/'.$class_name.'.php';
-});
+
+namespace MarketingCloud;
 
 /**
  * This class defines any additional attribute for a subscriber.
@@ -52,4 +51,3 @@ class ET_ProfileAttribute extends ET_BaseObject
 		return new ET_Configure($this->authStub, $this->obj, "delete", $this->props);
 	}
 }
-?>

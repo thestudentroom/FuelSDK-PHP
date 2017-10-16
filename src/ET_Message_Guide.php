@@ -1,7 +1,6 @@
 <?php
-spl_autoload_register( function($class_name) {
-    include_once 'src/'.$class_name.'.php';
-});
+
+namespace MarketingCloud;
 
 /**
  * The class can get, convert, render, send messages.
@@ -92,4 +91,3 @@ class ET_Message_Guide extends ET_CUDSupportRest
 		return $response;
 	}
 }
-?>
