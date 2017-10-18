@@ -7,7 +7,7 @@ use SoapVar;
 
 use MarketingCloud\Constructor;
 use MarketingCloud\Info;
-use MarketingCloud\REST\Util;
+use MarketingCloud\Util;
 
 /**
  * This class represents the GET operation for SOAP service.

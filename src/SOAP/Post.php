@@ -5,6 +5,7 @@ namespace MarketingCloud\SOAP;
 use SoapVar;
 
 use MarketingCloud\Constructor;
+use MarketingCloud\Util;
 
 /**
  * This class represents the POST operation for SOAP service.
