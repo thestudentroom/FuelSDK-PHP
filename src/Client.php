@@ -13,7 +13,7 @@ use RobRichards\WsePhp\WSSESoap;
 use Firebase\JWT;
 
 use MarketingCloud\SOAP\Post;
-use MarketingCloud\REST\Util;
+use MarketingCloud\REST\Util as RestUtil;
 
 /**
 * Defines a Client interface class which manages the authentication process.
@@ -161,7 +161,7 @@ class Client extends SoapClient {
 
 		try {
 			$url = $this->baseUrl."/platform/v1/endpoints/soap?access_token=".$this->getAuthToken($this->tenantKey);
-			$endpointResponse = Util::restGet($url, $this);
+			$endpointResponse = RestUtil::restGet($url, $this);
 			$endpointObject = json_decode($endpointResponse->body);
 			if ($endpointObject && property_exists($endpointObject,"url")) {
 				$this->endpoint = $endpointObject->url;
@@ -228,7 +228,7 @@ class Client extends SoapClient {
 				if (!is_null($this->getRefreshToken($this->tenantKey))){
 					$jsonRequest->refreshToken = $this->getRefreshToken($this->tenantKey);
 				}
-				$authResponse = Util::restPost($url, json_encode($jsonRequest), $this);
+				$authResponse = RestUtil::restPost($url, json_encode($jsonRequest), $this);
 				$authObject = json_decode($authResponse->body);
 
 				if ($authResponse && property_exists($authObject,"accessToken")){
@@ -428,7 +428,7 @@ class Client extends SoapClient {
 	 * @param  string $authToken Authentication token to be set
 	 * @param  string $authTokenExpiration Authentication token expiration value
 	 */
-	public function setAuthToken($tenantKey = null, $authToken, $authTokenExpiration) {
+	public function setAuthToken($tenantKey, $authToken, $authTokenExpiration) {
 		if ($this->tenantTokens[$tenantKey] == null) {
 			$this->tenantTokens[$tenantKey] = array();
 		}
@@ -441,7 +441,7 @@ class Client extends SoapClient {
 	 * @param  string $tenantKey Tenant key for which authenication token is returned
 	 * @return string Authenticaiton token for the tenant key
 	 */
-	public function getAuthTokenExpiration($tenantKey = null) {
+	public function getAuthTokenExpiration($tenantKey) {
 		$tenantKey = $tenantKey == null ? $this->tenantKey : $tenantKey;
 		if ($this->tenantTokens[$tenantKey] == null) {
 			$this->tenantTokens[$tenantKey] = array();
@@ -456,7 +456,7 @@ class Client extends SoapClient {
 	 * @param  string $tenantKey
 	 * @return string Internal authenication token
 	 */
-	public function getInternalAuthToken($tenantKey = null) {
+	public function getInternalAuthToken($tenantKey) {
 		$tenantKey = $tenantKey == null ? $this->tenantKey : $tenantKey;
 		if ($this->tenantTokens[$tenantKey] == null) {
 			$this->tenantTokens[$tenantKey] = array();
@@ -471,7 +471,7 @@ class Client extends SoapClient {
 	 * @param  string $tenantKey
 	 * @param string $internalAuthToken
 	 */
-	public function setInternalAuthToken($tenantKey = null, $internalAuthToken) {
+	public function setInternalAuthToken($tenantKey, $internalAuthToken) {
 		if ($this->tenantTokens[$tenantKey] == null) {
 			$this->tenantTokens[$tenantKey] = array();
 		}
@@ -483,7 +483,7 @@ class Client extends SoapClient {
 	 * @param  string $tenantKey Tenant key to which refresh token is set
 	 * @param  string $refreshToken Refresh authenication token
 	 */
-	public function setRefreshToken($tenantKey = null, $refreshToken) {
+	public function setRefreshToken($tenantKey, $refreshToken) {
 		if ($this->tenantTokens[$tenantKey] == null) {
 			$this->tenantTokens[$tenantKey] = array();
 		}
@@ -496,7 +496,7 @@ class Client extends SoapClient {
 	 * @param string $tenantKey
 	 * @return string Refresh token for the tenant
 	 */
-	public function getRefreshToken($tenantKey = null) {
+	public function getRefreshToken($tenantKey) {
 		$tenantKey = $tenantKey == null ? $this->tenantKey : $tenantKey;
 		if ($this->tenantTokens[$tenantKey] == null) {
 			$this->tenantTokens[$tenantKey] = array();
