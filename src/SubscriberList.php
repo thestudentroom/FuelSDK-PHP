@@ -2,6 +2,8 @@
 
 namespace MarketingCloud;
 
+use MarketingCloud\SOAP\CUDWithUpsertSupport;
+
 /**
  * This class represents a marketing list of subscribers.
  */

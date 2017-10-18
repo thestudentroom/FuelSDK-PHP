@@ -4,13 +4,15 @@ namespace MarketingCloud;
 
 use stdClass;
 
+use MarketingCloud\REST\CUDSupport;
+
 /**
  *	An asset is an instance of any kind of content in the CMS.
  */
-class Asset extends CUDSupportRest {
+class Asset extends CUDSupport {
 
 	/**
-	* The constructor will assign endpoint, urlProps, urlPropsRequired fields of parent BaseObjectRest
+	* The constructor will assign endpoint, urlProps, urlPropsRequired fields of parent BaseObject
 	*/
 	public function __construct() {
 		$this->endpoint = "https://www.exacttargetapis.com/guide/v1/contentItems/portfolio/{id}";

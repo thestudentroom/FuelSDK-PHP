@@ -1,6 +1,8 @@
 <?php
 
-namespace MarketingCloud;
+namespace MarketingCloud\SOAP;
+
+use MarketingCloud\Info;
 
 /**
  * This class represents the get operation for SOAP service.

@@ -2,10 +2,12 @@
 
 namespace MarketingCloud;
 
+use MarketingCloud\REST\CUDSupport;
+
 /**
  * Represents an asset associated with a campaign.
  */
-class Campaign_Asset extends CUDSupportRest {
+class Campaign_Asset extends CUDSupport {
 
 	/**
 	* Initializes a new instance of the class and will assign endpoint, urlProps, urlPropsRequired fields of parent BaseObjectRest

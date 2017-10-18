@@ -1,9 +1,13 @@
 <?php
 
-namespace MarketingCloud;
+namespace MarketingCloud\SOAP;
 
 use stdClass;
 use SoapVar;
+
+use MarketingCloud\Constructor;
+use MarketingCloud\Info;
+use MarketingCloud\REST\Util;
 
 /**
  * This class represents the GET operation for SOAP service.

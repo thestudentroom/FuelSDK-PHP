@@ -12,6 +12,9 @@ use DOMXPath;
 use RobRichards\WsePhp\WSSESoap;
 use Firebase\JWT;
 
+use MarketingCloud\SOAP\Post;
+use MarketingCloud\REST\Util;
+
 /**
 * Defines a Client interface class which manages the authentication process.
 * This is the main client class which performs authentication, obtains auth token, if expired refresh auth token.

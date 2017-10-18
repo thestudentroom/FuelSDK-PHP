@@ -2,6 +2,8 @@
 
 namespace MarketingCloud;
 
+use MarketingCloud\SOAP\CUDWithUpsertSupport;
+
 /**
  * A person subscribed to receive email or SMS communication.
  */

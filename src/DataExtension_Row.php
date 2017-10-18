@@ -4,6 +4,8 @@ namespace MarketingCloud;
 
 use Exception;
 
+use MarketingCloud\SOAP\CUDWithUpsertSupport;
+
 /**
  * ETDataExtensionRow - Represents Data Extension Row.
  */

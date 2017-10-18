@@ -2,6 +2,8 @@
 
 namespace MarketingCloud;
 
+use MarketingCloud\SOAP\CUDSupport;
+
 /**
  * This class represents a folder in a Marketing Cloud account.
  */

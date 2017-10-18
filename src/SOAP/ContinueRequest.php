@@ -1,6 +1,8 @@
 <?php
 
-namespace MarketingCloud;
+namespace MarketingCloud\SOAP;
+
+use MarketingCloud\Constructor;
 
 /**
  * This class represents ContinueRequest for SOAP operation.

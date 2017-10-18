@@ -2,6 +2,8 @@
 
 namespace MarketingCloud;
 
+use MarketingCloud\SOAP\CUDSupport;
+
 /**
  * ETDataExtension - Represents a data extension within an account.
  */

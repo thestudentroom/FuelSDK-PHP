@@ -1,6 +1,6 @@
 <?php
 
-namespace MarketingCloud;
+namespace MarketingCloud\SOAP;
 
 /**
  * This class represents the put operation for SOAP service.

@@ -2,6 +2,9 @@
 
 namespace MarketingCloud;
 
+use MarketingCloud\SOAP\CUDSupport;
+use MarketingCloud\SOAP\Get;
+
 /**
  * This class defines a reusable pattern of import options.
  */

@@ -2,6 +2,9 @@
 
 namespace MarketingCloud;
 
+use MarketingCloud\SOAP\CUDSupport;
+use MarketingCloud\SOAP\Post;
+
 /**
 * Defines a triggered send in the account.
 */

@@ -1,11 +1,11 @@
 <?php
 
-namespace MarketingCloud;
+namespace MarketingCloud\REST;
 
 /**
  * This class represents the get operation for REST service.
  */
-class GetSupportRest extends BaseObjectRest {
+class GetSupport extends BaseObject {
 
 	/**
 	 * @var      int   The last page number
@@ -14,7 +14,7 @@ class GetSupportRest extends BaseObjectRest {
 
 	/**
 	 * method for calling a Fuel API using GET
-	 * @return GetRest     Object of type GetRest which contains http status code, response, etc from the GET REST service
+	 * @return Get     Object of type Get which contains http status code, response, etc from the GET REST service
 	 */
 	public function get() {
 
@@ -45,7 +45,7 @@ class GetSupportRest extends BaseObjectRest {
 		$additionalQS["access_token"] = $this->authStub->getAuthToken();
 		$queryString = http_build_query($additionalQS);
 		$completeURL = "{$completeURL}?{$queryString}";
-		$response = new GetRest($this->authStub, $completeURL, $queryString);
+		$response = new Get($this->authStub, $completeURL, $queryString);
 
 		if (property_exists($response->results, 'page')){
 			$this->lastPageNumber = $response->results->page;
@@ -69,7 +69,7 @@ class GetSupportRest extends BaseObjectRest {
 	}
 
 	/**
-	 * @return GetRest    returns more response from the GET REST service of type GetRest Object
+	 * @return Get    returns more response from the GET REST service of type GetRest Object
 	 */
 	public function getMoreResults() {
 

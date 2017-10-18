@@ -1,11 +1,13 @@
 <?php
 
-namespace MarketingCloud;
+namespace MarketingCloud\REST;
+
+use MarketingCloud\Constructor;
 
 /**
- * This class represents the PATCH operation for REST service.
+ * This class represents the PUT operation for REST service.
  */
-class PatchRest extends Constructor {
+class Put extends Constructor {
 
 	/**
 	 * Initializes a new instance of the class.
@@ -14,7 +16,7 @@ class PatchRest extends Constructor {
 	 * @param 	array       $props 		Dictionary type array which may hold e.g. array('id' => '', 'key' => '')
 	 */
 	public function __construct($authStub, $url, $props) {
-		$restResponse = Util::restPatch($url, json_encode($props), $authStub);
+		$restResponse = Util::restPut($url, json_encode($props), $authStub);
 		parent::__construct($restResponse->body, $restResponse->httpcode, true);
 	}
 

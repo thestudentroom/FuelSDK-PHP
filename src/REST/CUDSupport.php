@@ -1,13 +1,13 @@
 <?php
 
-namespace MarketingCloud;
+namespace MarketingCloud\REST;
 
 use Exception;
 
 /**
  * This class represents the create, update, delete operation for REST service.
  */
-class CUDSupportRest extends GetSupportRest {
+class CUDSupport extends GetSupport {
 
 	/**
 	 * @var      string      Folder property e.g. "Category", "CategoryID", etc.
@@ -20,7 +20,7 @@ class CUDSupportRest extends GetSupportRest {
 	protected $folderMediaType;
 
 	/**
-	 * @return PostRest     Object of type PostRest which contains http status code, response, etc from the POST REST service
+	 * @return Post     Object of type Post which contains http status code, response, etc from the POST REST service
 	 */
 	public function post() {
 
@@ -58,7 +58,7 @@ class CUDSupportRest extends GetSupportRest {
 
 	/**
 	 * method for calling a Fuel API using PATCH
-	 * @return PatchRest     Object of type PatchRest which contains http status code, response, etc from the PATCH REST service
+	 * @return Patch     Object of type Patch which contains http status code, response, etc from the PATCH REST service
 	 */
 	public function patch() {
 
@@ -84,7 +84,7 @@ class CUDSupportRest extends GetSupportRest {
 		$additionalQS["access_token"] = $this->authStub->getAuthToken();
 		$queryString = http_build_query($additionalQS);
 		$completeURL = "{$completeURL}?{$queryString}";
-		$response = new PatchRest($this->authStub, $completeURL, $this->props);
+		$response = new Patch($this->authStub, $completeURL, $this->props);
 
 		return $response;
 
@@ -92,7 +92,7 @@ class CUDSupportRest extends GetSupportRest {
 
 	/**
 	 * method for calling a Fuel API using DELETE
-	 * @return DeleteRest     Object of type DeleteRest which contains http status code, response, etc from the DELETE REST service
+	 * @return Delete     Object of type Delete which contains http status code, response, etc from the DELETE REST service
 	 */
 	public function delete() {
 
@@ -117,7 +117,7 @@ class CUDSupportRest extends GetSupportRest {
 		$additionalQS["access_token"] = $this->authStub->getAuthToken();
 		$queryString = http_build_query($additionalQS);
 		$completeURL = "{$completeURL}?{$queryString}";
-		$response = new DeleteRest($this->authStub, $completeURL);
+		$response = new Delete($this->authStub, $completeURL);
 
 		return $response;
 

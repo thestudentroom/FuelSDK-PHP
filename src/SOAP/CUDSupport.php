@@ -1,8 +1,10 @@
 <?php
 
-namespace MarketingCloud;
+namespace MarketingCloud\SOAP;
 
 use Exception;
+
+use MarketingCloud\Folder;
 
 /**
  * This class represents the create, update, delete operation for SOAP service.

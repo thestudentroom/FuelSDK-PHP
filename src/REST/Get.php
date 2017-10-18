@@ -1,11 +1,13 @@
 <?php
 
-namespace MarketingCloud;
+namespace MarketingCloud\REST;
+
+use MarketingCloud\Constructor;
 
 /**
  * This class represents the GET operation for REST service.
  */
-class GetRest extends Constructor {
+class Get extends Constructor {
 
 	/**
 	 * Initializes a new instance of the class.

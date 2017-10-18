@@ -1,11 +1,11 @@
 <?php
 
-namespace MarketingCloud;
+namespace MarketingCloud\REST;
 
 /**
  * This class represents the base object for REST operation.
  */
-class BaseObjectRest {
+class BaseObject {
 
    /**
 	 * @var      Client   The ET client object which performs the auth token, refresh token using clientID clientSecret

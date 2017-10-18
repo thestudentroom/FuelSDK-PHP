@@ -1,6 +1,6 @@
 <?php
 
-namespace MarketingCloud;
+namespace MarketingCloud\SOAP;
 
 /**
  * This class represents the base object for SOAP operation.

@@ -1,8 +1,10 @@
 <?php
 
-namespace MarketingCloud;
+namespace MarketingCloud\SOAP;
 
 use SoapVar;
+
+use MarketingCloud\Constructor;
 
 /**
  * This class represents the DELETE operation for SOAP service.

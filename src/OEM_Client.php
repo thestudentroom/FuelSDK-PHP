@@ -2,6 +2,9 @@
 
 namespace MarketingCloud;
 
+use MarketingCloud\REST\Get;
+use MarketingCloud\REST\Put;
+
 /**
  * The class can create and retrieve specific tenant.
  */
@@ -17,7 +20,7 @@ class OEM_Client extends Client {
 		$additionalQS["access_token"] = $this->getAuthToken();
 		$queryString = http_build_query($additionalQS);
 		$completeURL = "https://www.exacttargetapis.com/provisioning/v1/tenants/{$key}?{$queryString}";
-		return new PutRest($this, $completeURL, $tenantInfo);
+		return new Put($this, $completeURL, $tenantInfo);
 	}
 
 	/**
@@ -28,7 +31,7 @@ class OEM_Client extends Client {
 		$additionalQS["access_token"] = $this->getAuthToken();
 		$queryString = http_build_query($additionalQS);
 		$completeURL = "https://www.exacttargetapis.com/provisioning/v1/tenants/?{$queryString}";
-		return new GetRest($this, $completeURL, $queryString);
+		return new Get($this, $completeURL, $queryString);
 	}
 
 }

@@ -2,6 +2,9 @@
 
 namespace MarketingCloud;
 
+use MarketingCloud\SOAP\CUDSupport;
+use MarketingCloud\SOAP\Get;
+
 /**
  * This class contains the message information, sender profile, delivery profile, and audience information.
  */

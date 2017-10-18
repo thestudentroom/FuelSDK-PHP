@@ -1,6 +1,6 @@
 <?php
 
-namespace MarketingCloud;
+namespace MarketingCloud\REST;
 
 use stdClass;
 

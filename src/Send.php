@@ -2,6 +2,8 @@
 
 namespace MarketingCloud;
 
+use MarketingCloud\SOAP\CUDSupport;
+
 /**
  * Used to send email and retrieve aggregate data based on a JobID.
  */

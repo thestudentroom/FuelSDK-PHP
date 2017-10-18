@@ -2,6 +2,8 @@
 
 namespace MarketingCloud;
 
+use MarketingCloud\SOAP\GetSupport;
+
 /**
  * Contains information about the opening of a message send by a subscriber.
  */

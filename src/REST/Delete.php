@@ -1,11 +1,13 @@
 <?php
 
-namespace MarketingCloud;
+namespace MarketingCloud\REST;
+
+use MarketingCloud\Constructor;
 
 /**
  * This class represents the DELETE operation for REST service.
  */
-class DeleteRest extends Constructor {
+class Delete extends Constructor {
 
 	/**
 	 * Initializes a new instance of the class.

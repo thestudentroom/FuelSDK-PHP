@@ -2,6 +2,8 @@
 
 namespace MarketingCloud;
 
+use MarketingCloud\SOAP\CUDSupport;
+
 /**
  * Email - Represents an email in a Marketing Cloud account.
  */

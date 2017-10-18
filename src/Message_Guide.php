@@ -2,10 +2,14 @@
 
 namespace MarketingCloud;
 
+use MarketingCloud\SOAP\Post as SoapPost;
+
+use MarketingCloud\REST\CUDSupport;
+
 /**
  * The class can get, convert, render, send messages.
  */
-class Message_Guide extends CUDSupportRest {
+class Message_Guide extends CUDSupport {
 
 	/**
 	 * The constructor will assign endpoint, urlProps, urlPropsRequired fields of parent BaseObjectRest
@@ -41,7 +45,7 @@ class Message_Guide extends CUDSupportRest {
 	 */
 	public function convert() {
 		$completeURL = "https://www.exacttargetapis.com/guide/v1/messages/convert?access_token=" . $this->authStub->getAuthToken();
-		$response = new PostRest($this->authStub, $completeURL, $this->props);
+		$response = new Post($this->authStub, $completeURL, $this->props);
 		return $response;
 	}
 
@@ -61,7 +65,7 @@ class Message_Guide extends CUDSupportRest {
 		$send = array();
 		$send["Email"] = array("Subject"=> $this->props['subject'], "HTMLBody"=> $html);
 		$send["List"] = array("ID"=> $this->props['listID']);
-		$response = new Post($this->authStub, "Send", $send);
+		$response = new SoapPost($this->authStub, "Send", $send);
 		return $response;
 	}
 
@@ -75,10 +79,10 @@ class Message_Guide extends CUDSupportRest {
 
 		if (is_array($this->props) && array_key_exists("id", $this->props)) {
 			$completeURL = "https://www.exacttargetapis.com/guide/v1/messages/render/{$this->props['id']}?access_token=" . $this->authStub->getAuthToken();
-			$response = new GetRest($this->authStub, $completeURL, null);
+			$response = new Get($this->authStub, $completeURL, null);
 		} else {
 			$completeURL = "https://www.exacttargetapis.com/guide/v1/messages/render?access_token=" . $this->authStub->getAuthToken();
-			$response = new PostRest($this->authStub, $completeURL, $this->props);
+			$response = new Post($this->authStub, $completeURL, $this->props);
 		}
 		return $response;
 	}

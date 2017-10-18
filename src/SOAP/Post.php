@@ -1,13 +1,15 @@
 <?php
 
-namespace MarketingCloud;
+namespace MarketingCloud\SOAP;
 
 use SoapVar;
 
+use MarketingCloud\Constructor;
+
 /**
- * This class represents the PATCH operation for SOAP service.
+ * This class represents the POST operation for SOAP service.
  */
-class Patch extends Constructor {
+class Post extends Constructor {
 
 	/**
 	 * Initializes a new instance of the class.
@@ -16,23 +18,30 @@ class Patch extends Constructor {
 	 * @param 	array       $props 		Dictionary type array which may hold e.g. array('id' => '', 'key' => '')
 	 * @param 	bool 		$upsert 	If true SaveAction is UpdateAdd, otherwise not. By default false.
 	 */
-	public function __construct($authStub, $objType, $props,$upsert = false) {
+	public function __construct($authStub, $objType, $props, $upsert = false) {
 
 		$authStub->refreshToken();
 		$cr = array();
 		$objects = array();
-		$object = $props;
 
-		$objects["Objects"] = new SoapVar($props, SOAP_ENC_OBJECT, $objType, "http://exacttarget.com/wsdl/partnerAPI");
+		if (Util::isAssoc($props)){
+			$objects["Objects"] = new SoapVar($props, SOAP_ENC_OBJECT, $objType, "http://exacttarget.com/wsdl/partnerAPI");
+		}
+		else {
+			$objects["Objects"] = array();
+			foreach($props as $object){
+				$objects["Objects"][] = new SoapVar($object, SOAP_ENC_OBJECT, $objType, "http://exacttarget.com/wsdl/partnerAPI");
+			}
+		}
+
 		if ($upsert) {
 			$objects["Options"] = array('SaveOptions' => array('SaveOption' => array('PropertyName' => '*', 'SaveAction' => 'UpdateAdd' )));
 		}
 		else {
 			$objects["Options"] = "";
 		}
-		$cr["UpdateRequest"] = $objects;
-
-		$return = $authStub->__soapCall("Update", $cr, null, null , $out_header);
+		$cr["CreateRequest"] = $objects;
+		$return = $authStub->__soapCall("Create", $cr, null, null , $out_header);
 		parent::__construct($return, $authStub->__getLastResponseHTTPCode());
 
 		if ($this->status){

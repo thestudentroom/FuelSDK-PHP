@@ -2,6 +2,8 @@
 
 namespace MarketingCloud;
 
+use MarketingCloud\SOAP\CUDSupport;
+
 /**
  * ContentArea - Represents a ContentArea class.
  * A ContentArea represents a defined section of reusable content. One or many ContentAreas can be defined for an Email object.
