@@ -3,38 +3,38 @@
 namespace MarketingCloud;
 
 /**
-* ETDataExtension - Represents a data extension within an account.
-*/
-class DataExtension extends CUDSupport
-{
+ * ETDataExtension - Represents a data extension within an account.
+ */
+class DataExtension extends CUDSupport {
+
 	/**
-	* @var DataExtension_Column[]      Gets or sets array of DE columns.
-	*/
+	 * @var DataExtension_Column[]      Gets or sets array of DE columns.
+	 */
 	public  $columns;
 
-	/** 
-	* Initializes a new instance of the class.
-	*/
-	function __construct()
-	{
+	/**
+	 * Initializes a new instance of the class.
+	 */
+	public function __construct() {
 		$this->obj = "DataExtension";
 	}
 
-    /**
-	* Post this instance.
-    * @return Post     Object of type Post which contains http status code, response, etc from the POST SOAP service
-    */
-	public function post()
-	{
+	/**
+	 * Post this instance.
+	 * @return Post     Object of type Post which contains http status code, response, etc from the POST SOAP service
+	 */
+	public function post() {
+
 		$originalProps = $this->props;
-		if (Util::isAssoc($this->props)){			
-			$this->props["Fields"] = array("Field"=>array());		
+		if (Util::isAssoc($this->props)){
+			$this->props["Fields"] = array("Field"=>array());
 			if (!is_null($this->columns) && is_array($this->columns)){
 				foreach ($this->columns as $column){
 					array_push($this->props['Fields']['Field'], $column);
-				}	
-			}							
-		} else {
+				}
+			}
+		}
+		else {
 			$newProps = array();
 			foreach ($this->props as $DE) {
 				$newDE = $DE;
@@ -42,31 +42,35 @@ class DataExtension extends CUDSupport
 				if (!is_null($DE['columns']) && is_array($DE['columns'])){
 					foreach ($DE['columns'] as $column){
 						array_push($newDE['Fields']['Field'], $column);
-					}						
+					}
 				}
 				array_push($newProps, $newDE);
 			}
-			$this->props = $newProps;					
+			$this->props = $newProps;
 		}
-		
+
 		$response = parent::post();
-		
+
 		$this->props = $originalProps;
 		return $response;
+
 	}
 
-    /**
-	* Patch this instance.
-    * @return Patch     Object of type Patch which contains http status code, response, etc from the PATCH SOAP service
-    */	
-	public function patch()
-	{
-		$this->props["Fields"] = array("Field"=>array());				
+	/**
+	 * Patch this instance.
+	 * @return Patch     Object of type Patch which contains http status code, response, etc from the PATCH SOAP service
+	 */
+	public function patch() {
+
+		$this->props["Fields"] = array("Field"=>array());
 		foreach ($this->columns as $column){
 			array_push($this->props['Fields']['Field'], $column);
-		}	
-		$response = parent::patch();		
-		unset($this->props["Fields"]);		
+		}
+		$response = parent::patch();
+		unset($this->props["Fields"]);
+
 		return $response;
+
 	}
+
 }
