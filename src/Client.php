@@ -272,7 +272,7 @@ class Client extends SoapClient {
 				}
 			}
 			if ($getNewWSDL) {
-				$newWSDL = file_gcontents($wsdlLoc);
+				$newWSDL = file_get_contents($wsdlLoc);
 				file_put_contents($this->xmlLoc, $newWSDL);
 			}
 
