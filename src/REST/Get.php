@@ -3,6 +3,7 @@
 namespace MarketingCloud\REST;
 
 use MarketingCloud\Constructor;
+use MarketingCloud\Util;
 
 /**
  * This class represents the GET operation for REST service.
@@ -16,9 +17,15 @@ class Get extends Constructor {
 	 * @param 	mixed 		$qs 		Reserved for future use
 	 */
 	public function __construct($authStub, $url, $qs = null) {
-		$restResponse = Util::restGet($url, $authStub);
+		$response = $authStub->getHTTP()->get(
+			$url,
+			null,
+			[
+				'User-Agent' => Util::getSDKVersion(),
+			]
+		);
 		$this->moreResults = false;
-		parent::__construct($restResponse->body, $restResponse->httpcode, true);
+		parent::__construct($response->body, $response->status, true);
 	}
 
 }

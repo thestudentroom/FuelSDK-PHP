@@ -3,11 +3,12 @@
 namespace MarketingCloud\REST;
 
 use MarketingCloud\Constructor;
+use MarketingCloud\Util;
 
 /**
  * This class represents the POST operation for REST service.
  */
-class PostR extends Constructor {
+class Post extends Constructor {
 
 	/**
 	 * Initializes a new instance of the class.
@@ -16,8 +17,15 @@ class PostR extends Constructor {
 	 * @param 	array       $props 		Dictionary type array which may hold e.g. array('id' => '', 'key' => '')
 	 */
 	public function __construct($authStub, $url, $props) {
-		$restResponse = Util::restPost($url, json_encode($props), $authStub);
-		parent::__construct($restResponse->body, $restResponse->httpcode, true);
+		$response = $authStub->getHTTP()->post(
+			$url,
+			json_encode($props),
+			[
+				'User-Agent'   => Util::getSDKVersion(),
+				'Content-Type' => 'application/json',
+			]
+		);
+		parent::__construct($response->body, $response->status, true);
 	}
 
 }

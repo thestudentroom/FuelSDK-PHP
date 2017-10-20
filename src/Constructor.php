@@ -39,38 +39,47 @@ class Constructor {
 
 	/**
 	 * Initializes a new instance of the class.
-	 * @param 	string 		$requestresponse 	The response from the request
-	 * @param 	int 		$httpcode 			The HTTP status code e.g. 200, 404. etc
-	 * @param 	bool 		$restcall 			Whether to make REST or SOAP call, default is false i.e. SOAP calls
+	 * @param 	string 		$response The response from the request
+	 * @param 	int 		$status   The HTTP status code e.g. 200, 404. etc
+	 * @param 	bool 		$isREST   Whether to make REST or SOAP call, default is false i.e. SOAP calls
 	 */
-	public function __construct($requestresponse, $httpcode, $restcall = false) {
+	public function __construct( $response, $status, $isREST = false ) {
 
-		$this->code = $httpcode;
+		$this->code = $status;
 
-		if (!$restcall) {
-			if(is_soap_fault($requestresponse)) {
-				$this->status = false;
-				$this->message = "SOAP Fault: (faultcode: {$requestresponse->faultcode}, faultstring: {$requestresponse->faultstring})";
-				$this->message = "{$requestresponse->faultcode} {$requestresponse->faultstring})";
-			}
-			else {
-				$this->status = true;
-			}
+		if( $isREST ) {
+			$this->restResponse($response);
 		}
 		else {
-			if ($this->code != 200 && $this->code != 201 && $this->code != 202) {
-				$this->status = false;
-			}
-			else {
-				$this->status = true;
-			}
+			$this->soapResponse($response);
+		}
 
-			if (json_decode($requestresponse) != null){
-				$this->results = json_decode($requestresponse);
-			}
-			else  {
-				$this->message = $requestresponse;
-			}
+	}
+
+	protected function restResponse( $response ) {
+
+		$this->status = false;
+
+		if( in_array($this->code, [200, 201, 202]) ) {
+			$this->status = true;
+		}
+
+		$this->results = json_decode($response);
+
+		if( $this->results === null ){
+			$this->message = $response;
+		}
+
+	}
+
+	protected function soapResponse( $response ) {
+
+		$this->status = true;
+
+		if( is_soap_fault($response) ) {
+			$this->status = false;
+			$this->message = "SOAP Fault: (faultcode: {$response->faultcode}, faultstring: {$response->faultstring})";
+			$this->message = "{$response->faultcode} {$response->faultstring})";
 		}
 
 	}

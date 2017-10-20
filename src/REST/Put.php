@@ -3,6 +3,7 @@
 namespace MarketingCloud\REST;
 
 use MarketingCloud\Constructor;
+use MarketingCloud\Util;
 
 /**
  * This class represents the PUT operation for REST service.
@@ -16,8 +17,15 @@ class Put extends Constructor {
 	 * @param 	array       $props 		Dictionary type array which may hold e.g. array('id' => '', 'key' => '')
 	 */
 	public function __construct($authStub, $url, $props) {
-		$restResponse = Util::restPut($url, json_encode($props), $authStub);
-		parent::__construct($restResponse->body, $restResponse->httpcode, true);
+		$response = $authStub->getHTTP()->put(
+			$url,
+			json_encode($props),
+			[
+				'User-Agent'   => Util::getSDKVersion(),
+				'Content-Type' => 'application/json',
+			]
+		);
+		parent::__construct($response->body, $response->status, true);
 	}
 
 }

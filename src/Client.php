@@ -3,6 +3,7 @@
 namespace MarketingCloud;
 
 use SoapClient;
+use Exception;
 use DateTime;
 use DateInterval;
 use stdClass;
@@ -13,7 +14,7 @@ use RobRichards\WsePhp\WSSESoap;
 use Firebase\JWT;
 
 use MarketingCloud\SOAP\Post;
-use MarketingCloud\REST\Util as RestUtil;
+use MarketingCloud\Util;
 
 /**
 * Defines a Client interface class which manages the authentication process.
@@ -59,6 +60,8 @@ class Client extends SoapClient {
 	 */
 	public $proxyPassword;
 
+	protected $http;
+
 	private $wsdlLoc, $debugSOAP, $lastHTTPCode, $clientId,
 			$clientSecret, $appsignature, $endpoint,
 			$tenantTokens, $tenantKey, $xmlLoc,$baseUrl, $baseAuthUrl;
@@ -86,6 +89,7 @@ class Client extends SoapClient {
 	 * <i><b>proxypassword</b></i> - proxy server password</br>
 	 */
 	public function __construct($getWSDL = false, $debug = false, $params = null) {
+
 		$tenantTokens = array();
 		$config = false;
 
@@ -140,6 +144,13 @@ class Client extends SoapClient {
 			throw new Exception('clientid or clientsecret is null: Must be provided in config file or passed when instantiating Client');
 		}
 
+		$this->http = new HTTP([
+			'proxy_host' => $this->proxyHost,
+			'proxy_port' => $this->proxyPort,
+			'proxy_user' => $this->proxyUserName,
+			'proxy_pass' => $this->proxyPassword,
+		]);
+
 		if ($getWSDL){
 			$this->CreateWSDL($this->wsdlLoc);
 		}
@@ -161,7 +172,7 @@ class Client extends SoapClient {
 
 		try {
 			$url = $this->baseUrl."/platform/v1/endpoints/soap?access_token=".$this->getAuthToken($this->tenantKey);
-			$endpointResponse = RestUtil::restGet($url, $this);
+			$endpointResponse = $this->http->get($url);
 			$endpointObject = json_decode($endpointResponse->body);
 			if ($endpointObject && property_exists($endpointObject,"url")) {
 				$this->endpoint = $endpointObject->url;
@@ -194,6 +205,11 @@ class Client extends SoapClient {
 		parent::__construct($this->xmlLoc, $soapOptions);
 
 		parent::__setLocation($this->endpoint);
+
+	}
+
+	public function getHTTP() {
+		return $this->http;
 	}
 
 	/**
@@ -228,7 +244,14 @@ class Client extends SoapClient {
 				if (!is_null($this->getRefreshToken($this->tenantKey))){
 					$jsonRequest->refreshToken = $this->getRefreshToken($this->tenantKey);
 				}
-				$authResponse = RestUtil::restPost($url, json_encode($jsonRequest), $this);
+				$authResponse = $this->http->post(
+					$url,
+					json_encode($jsonRequest),
+					[
+						'User-Agent'   => Util::getSDKVersion(),
+						'Content-Type' => 'application/json',
+					]
+				);
 				$authObject = json_decode($authResponse->body);
 
 				if ($authResponse && property_exists($authObject,"accessToken")){
@@ -293,30 +316,7 @@ class Client extends SoapClient {
 	 */
 	public function GetLastModifiedDate($remotepath) {
 
-		$curl = curl_init($remotepath);
-		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-		curl_setopt($curl, CURLOPT_NOBODY, true);
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($curl, CURLOPT_FILETIME, true);
-
-		if (!empty($this->proxyHost)) {
-			curl_setopt($curl, CURLOPT_PROXY, $this->proxyHost);
-		}
-		if (!empty($this->proxyPort)) {
-			curl_setopt($curl, CURLOPT_PROXYPORT, $this->proxyPort);
-		}
-		if (!empty($this->proxyUserName) && !empty($this->proxyPassword)) {
-			curl_setopt($curl, CURLOPT_PROXYAUTH, CURLAUTH_BASIC);
-			curl_setopt($curl, CURLOPT_PROXYUSERPWD, $this->proxyUserName.':'.$this->proxyPassword);
-		}
-
-		$result = curl_exec($curl);
-
-		if ($result === false) {
-			throw new Exception(curl_error($curl));
-		}
-
-		return curl_getinfo($curl, CURLINFO_FILETIME);
+		return $this->http->getLastModifiedDate($remotepath);
 
 	}
 
@@ -345,32 +345,19 @@ class Client extends SoapClient {
 			error_log (str_replace($this->getInternalAuthToken($this->tenantKey),"REMOVED",$content));
 		}
 
-		$headers = array("Content-Type: text/xml","SOAPAction: ".$saction, "User-Agent: ".Util::getSDKVersion());
+		$response = $this->http->post(
+			$location,
+			$content,
+			[
+				'Content-Type' => 'text/xml',
+				'SOAPAction'   => $saction,
+				'User-Agent'   => Util::getSDKVersion(),
+			]
+		);
 
-		$ch = curl_init();
-		curl_setopt ($ch, CURLOPT_URL, $location);
-		curl_setopt ($ch, CURLOPT_HTTPHEADER, $headers);
-		curl_setopt ($ch, CURLOPT_POSTFIELDS, $content);
-		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-		curl_setopt($ch, CURLOPT_USERAGENT, Util::getSDKVersion());
+		$this->lastHTTPCode = $response->status;
 
-		if (!empty($this->proxyHost)) {
-			curl_setopt($ch, CURLOPT_PROXY, $this->proxyHost);
-		}
-		if (!empty($this->proxyPort)) {
-			curl_setopt($ch, CURLOPT_PROXYPORT, $this->proxyPort);
-		}
-		if (!empty($this->proxyUserName) && !empty($this->proxyPassword)) {
-			curl_setopt($ch, CURLOPT_PROXYAUTH, CURLAUTH_BASIC);
-			curl_setopt($ch, CURLOPT_PROXYUSERPWD, $this->proxyUserName.':'.$this->proxyPassword);
-		}
-
-		$output = curl_exec($ch);
-		$this->lastHTTPCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-		curl_close($ch);
-
-		return $output;
+		return $response->body;
 
 	}
 

@@ -3,6 +3,7 @@
 namespace MarketingCloud\REST;
 
 use MarketingCloud\Constructor;
+use MarketingCloud\Util;
 
 /**
  * This class represents the DELETE operation for REST service.
@@ -15,8 +16,14 @@ class Delete extends Constructor {
 	 * @param   string      $url        The endpoint URL
 	 */
 	public function __construct($authStub, $url) {
-		$restResponse = Util::restDelete($url, $authStub);
-		parent::__construct($restResponse->body, $restResponse->httpcode, true);
+		$response = $authStub->getHTTP()->delete(
+			$url,
+			null,
+			[
+				'User-Agent' => BaseUtil::getSDKVersion(),
+			]
+		);
+		parent::__construct($response->body, $response->status, true);
 	}
 
 }
