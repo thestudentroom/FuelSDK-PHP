@@ -21,7 +21,6 @@ class Patch extends Constructor {
 			$url,
 			json_encode($props),
 			[
-				'User-Agent'   => Util::getSDKVersion(),
 				'Content-Type' => 'application/json',
 			]
 		);

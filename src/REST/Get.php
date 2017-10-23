@@ -19,10 +19,7 @@ class Get extends Constructor {
 	public function __construct($authStub, $url, $qs = null) {
 		$response = $authStub->getHTTP()->get(
 			$url,
-			null,
-			[
-				'User-Agent' => Util::getSDKVersion(),
-			]
+			null
 		);
 		$this->moreResults = false;
 		parent::__construct($response->body, $response->status, true);

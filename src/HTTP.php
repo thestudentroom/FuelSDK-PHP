@@ -225,8 +225,6 @@ class HTTP {
 
 		return $combined;
 
-		curl_setopt($ch, CURLOPT_HTTPHEADER, $combined);
-
 	}
 
 	/**

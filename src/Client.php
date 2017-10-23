@@ -144,12 +144,17 @@ class Client extends SoapClient {
 			throw new Exception('clientid or clientsecret is null: Must be provided in config file or passed when instantiating Client');
 		}
 
-		$this->http = new HTTP([
-			'proxy_host' => $this->proxyHost,
-			'proxy_port' => $this->proxyPort,
-			'proxy_user' => $this->proxyUserName,
-			'proxy_pass' => $this->proxyPassword,
-		]);
+		$this->http = new HTTP(
+			[
+				'proxy_host' => $this->proxyHost,
+				'proxy_port' => $this->proxyPort,
+				'proxy_user' => $this->proxyUserName,
+				'proxy_pass' => $this->proxyPassword,
+			],
+			[
+				'User-Agent' => Util::getSDKVersion(),
+			]
+		);
 
 		if ($getWSDL){
 			$this->CreateWSDL($this->wsdlLoc);
@@ -248,7 +253,6 @@ class Client extends SoapClient {
 					$url,
 					json_encode($jsonRequest),
 					[
-						'User-Agent'   => Util::getSDKVersion(),
 						'Content-Type' => 'application/json',
 					]
 				);
@@ -351,7 +355,6 @@ class Client extends SoapClient {
 			[
 				'Content-Type' => 'text/xml',
 				'SOAPAction'   => $saction,
-				'User-Agent'   => Util::getSDKVersion(),
 			]
 		);
 

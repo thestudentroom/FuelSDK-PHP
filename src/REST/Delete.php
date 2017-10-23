@@ -18,10 +18,7 @@ class Delete extends Constructor {
 	public function __construct($authStub, $url) {
 		$response = $authStub->getHTTP()->delete(
 			$url,
-			null,
-			[
-				'User-Agent' => BaseUtil::getSDKVersion(),
-			]
+			null
 		);
 		parent::__construct($response->body, $response->status, true);
 	}
