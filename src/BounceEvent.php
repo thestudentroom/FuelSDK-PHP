@@ -2,6 +2,8 @@
 
 namespace MarketingCloud;
 
+use MarketingCloud\SOAP\GetSupport;
+
 /**
  *	Contains information pertaining to the specific event of an email message bounce.
  */

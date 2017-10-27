@@ -2,6 +2,8 @@
 
 namespace MarketingCloud;
 
+use MarketingCloud\SOAP\GetSupport;
+
 /**
  *  Represents ClickEvent Class.
  *  Contains information regarding a click on a link contained in a message.
