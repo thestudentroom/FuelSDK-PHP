@@ -418,7 +418,7 @@ class Client extends SoapClient {
 	 * @param  string $authToken Authentication token to be set
 	 * @param  string $authTokenExpiration Authentication token expiration value
 	 */
-	public function setAuthToken($tenantKey, $authToken, $authTokenExpiration) {
+	public function setAuthToken($tenantKey = null, $authToken, $authTokenExpiration) {
 		if ($this->tenantTokens[$tenantKey] == null) {
 			$this->tenantTokens[$tenantKey] = array();
 		}
@@ -431,7 +431,7 @@ class Client extends SoapClient {
 	 * @param  string $tenantKey Tenant key for which authenication token is returned
 	 * @return string Authenticaiton token for the tenant key
 	 */
-	public function getAuthTokenExpiration($tenantKey) {
+	public function getAuthTokenExpiration($tenantKey = null) {
 		$tenantKey = $tenantKey == null ? $this->tenantKey : $tenantKey;
 		if ($this->tenantTokens[$tenantKey] == null) {
 			$this->tenantTokens[$tenantKey] = array();
@@ -446,7 +446,7 @@ class Client extends SoapClient {
 	 * @param  string $tenantKey
 	 * @return string Internal authenication token
 	 */
-	public function getInternalAuthToken($tenantKey) {
+	public function getInternalAuthToken($tenantKey = null) {
 		$tenantKey = $tenantKey == null ? $this->tenantKey : $tenantKey;
 		if ($this->tenantTokens[$tenantKey] == null) {
 			$this->tenantTokens[$tenantKey] = array();
@@ -461,7 +461,7 @@ class Client extends SoapClient {
 	 * @param  string $tenantKey
 	 * @param string $internalAuthToken
 	 */
-	public function setInternalAuthToken($tenantKey, $internalAuthToken) {
+	public function setInternalAuthToken($tenantKey = null, $internalAuthToken) {
 		if ($this->tenantTokens[$tenantKey] == null) {
 			$this->tenantTokens[$tenantKey] = array();
 		}
@@ -473,7 +473,7 @@ class Client extends SoapClient {
 	 * @param  string $tenantKey Tenant key to which refresh token is set
 	 * @param  string $refreshToken Refresh authenication token
 	 */
-	public function setRefreshToken($tenantKey, $refreshToken) {
+	public function setRefreshToken($tenantKey = null, $refreshToken) {
 		if ($this->tenantTokens[$tenantKey] == null) {
 			$this->tenantTokens[$tenantKey] = array();
 		}
@@ -486,7 +486,7 @@ class Client extends SoapClient {
 	 * @param string $tenantKey
 	 * @return string Refresh token for the tenant
 	 */
-	public function getRefreshToken($tenantKey) {
+	public function getRefreshToken($tenantKey = null) {
 		$tenantKey = $tenantKey == null ? $this->tenantKey : $tenantKey;
 		if ($this->tenantTokens[$tenantKey] == null) {
 			$this->tenantTokens[$tenantKey] = array();
