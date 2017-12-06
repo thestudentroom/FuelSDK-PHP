@@ -100,4 +100,13 @@ class CUDSupport extends GetSupport {
 		return $response;
 	}
 
+    /**
+     * @return MultiDelete Object of type MultiDelete which contains http status code, response, etc from the DELETE SOAP service
+     */
+    public function multiDelete()
+    {
+        $response = new MultiDelete($this->authStub, $this->obj, $this->props);
+        return $response;
+    }
+
 }

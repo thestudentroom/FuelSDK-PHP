@@ -117,6 +117,47 @@ class DataExtension_Row extends CUDWithUpsertSupport {
 
 	}
 
+    /**
+     * Delete these instances.
+     * @return Multi_Delete Object of type Multi_Delete which contains http status code, response, etc from the DELETE SOAP service
+     */
+    public function multiDelete() {
+        $this->getCustomerKey();
+        $originalProps = $this->props;
+        $overrideProps = [];
+        $fields        = [];
+        $multiFields   = [];
+
+        foreach ($this->props as $key => $value){
+
+            // If value is an array, we need to process it differently
+            if (is_array($value)) {
+
+                // Foreach array value, create a field entry
+                foreach ($value as $childValue) {
+                    $multiFields[]  = [
+                        "Key" => [
+                            "Name" => $key,
+                            "Value" => $childValue
+                        ]
+                    ];
+                }
+            }
+            // Only allow multi items. Use standard delete for one row
+            else {
+                throw new Exception('The prop attribute requires the value to be an array for Multi Delete DataExtension row.');
+            }
+        }
+
+        $overrideProps['CustomerKey'] = $this->CustomerKey;
+        $overrideProps['Keys'] = $multiFields;
+
+        $this->props = $overrideProps;
+        $response = parent::multiDelete();
+        $this->props = $originalProps;
+        return $response;
+    }
+
 	private function getName() {
 
 		if (is_null($this->Name)){
