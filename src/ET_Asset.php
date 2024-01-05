@@ -1,7 +1,9 @@
 <?php
-spl_autoload_register( function($class_name) {
-    include_once 'src/'.$class_name.'.php';
-});
+// spl_autoload_register( function($class_name) {
+//     include_once 'src/'.$class_name.'.php';
+// });
+namespace FuelSdk;
+
 /**
  *	An asset is an instance of any kind of content in the CMS.
  */
@@ -12,7 +14,7 @@ class ET_Asset extends ET_CUDSupportRest
     */ 
 	function __construct()
 	{
-		$this->endpoint = "https://www.exacttargetapis.com/guide/v1/contentItems/portfolio/{id}";
+		$this->path = "/guide/v1/contentItems/portfolio/{id}";
 		$this->urlProps = array("id");
 		$this->urlPropsRequired = array();
 	}
@@ -23,13 +25,14 @@ class ET_Asset extends ET_CUDSupportRest
     */ 	
 	public function upload()
 	{
-		$completeURL = "https://www.exacttargetapis.com/guide/v1/contentItems/portfolio/fileupload?access_token=" . $this->authStub->getAuthToken();
+		// TODO create unit test for this function
+		$completeURL = $this->authStub->baseUrl . "/guide/v1/contentItems/portfolio/fileupload";
 
 		$post = array('file_contents'=>'@'.$this->props['filePath']);
 
         $ch = curl_init();
         
-		$headers = array("User-Agent: ".ET_Util::getSDKVersion());
+		$headers = array("User-Agent: ".ET_Util::getSDKVersion(), "Authorization: Bearer ".$this->authStub->getAuthToken());
 		curl_setopt ($ch, CURLOPT_HTTPHEADER, $headers);	
 
 		curl_setopt($ch, CURLOPT_URL, $completeURL);

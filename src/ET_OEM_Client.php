@@ -1,7 +1,8 @@
 <?php
-spl_autoload_register( function($class_name) {
-    include_once 'src/'.$class_name.'.php';
-});
+// spl_autoload_register( function($class_name) {
+//     include_once 'src/'.$class_name.'.php';
+// });
+namespace FuelSdk;
 
 /**
  * The class can create and retrieve specific tenant.
@@ -15,11 +16,8 @@ class ET_OEM_Client extends ET_Client
 	{
 		$key = $tenantInfo['key'];
 		unset($tenantInfo['key']);
-		$additionalQS = array();
-		$additionalQS["access_token"] = $this->getAuthToken();
-		$queryString = http_build_query($additionalQS);		
-		$completeURL = "https://www.exacttargetapis.com/provisioning/v1/tenants/{$key}?{$queryString}";
-		return new ET_PutRest($this, $completeURL, $tenantInfo);
+		$completeURL = $this->baseUrl . "/provisioning/v1/tenants/{$key}";
+		return new ET_PutRest($this, $completeURL, $tenantInfo, $this->getAuthToken());
 	}
 
     /**
@@ -27,11 +25,8 @@ class ET_OEM_Client extends ET_Client
     */
 	function GetTenants()
 	{
-		$additionalQS = array();
-		$additionalQS["access_token"] = $this->getAuthToken();
-		$queryString = http_build_query($additionalQS);		
-		$completeURL = "https://www.exacttargetapis.com/provisioning/v1/tenants/?{$queryString}";
-		return new ET_GetRest($this, $completeURL, $queryString);
+		$completeURL = $this->baseUrl . "/provisioning/v1/tenants/";
+		return new ET_GetRest($this, $completeURL, $this->getAuthToken());
 	}
 }
 ?>

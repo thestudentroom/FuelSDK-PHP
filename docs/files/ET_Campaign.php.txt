@@ -1,7 +1,8 @@
 <?php
-spl_autoload_register( function($class_name) {
-    include_once 'src/'.$class_name.'.php';
-});
+// spl_autoload_register( function($class_name) {
+//     include_once 'src/'.$class_name.'.php';
+// });
+namespace FuelSdk;
 
 /** 
 * Represents a program in an account
@@ -13,7 +14,7 @@ class ET_Campaign extends ET_CUDSupportRest
     */ 
 	function __construct()
 	{
-		$this->endpoint = "https://www.exacttargetapis.com/hub/v1/campaigns/{id}";		
+		$this->path = "/hub/v1/campaigns/{id}";		
 		$this->urlProps = array("id");
 		$this->urlPropsRequired = array();
 	}
