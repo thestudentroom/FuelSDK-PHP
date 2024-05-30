@@ -27,6 +27,7 @@ class ET_Info extends ET_Constructor
 		$request["DescribeRequests"] = $describeRequest;
 		$drm["DefinitionRequestMsg"] = $request;
 		
+		$out_header = [];
 		$return = $authStub->__soapCall("Describe", $drm, null, null , $out_header);
 		parent::__construct($return, $authStub->__getLastResponseHTTPCode());
 		

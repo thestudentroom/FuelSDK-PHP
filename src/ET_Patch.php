@@ -31,6 +31,7 @@ class ET_Patch extends ET_Constructor
 		}
 		$cr["UpdateRequest"] = $objects;
 		
+		$out_header = [];
 		$return = $authStub->__soapCall("Update", $cr, null, null , $out_header);
 		parent::__construct($return, $authStub->__getLastResponseHTTPCode());		
 		

@@ -26,6 +26,7 @@ class ET_Perform extends ET_Constructor
 		$performRequest['Definitions'][] = new SoapVar($props, SOAP_ENC_OBJECT, $objType, "http://exacttarget.com/wsdl/partnerAPI");
 		
 		$perform['PerformRequestMsg'] = $performRequest;
+		$out_header = [];
 		$return = $authStub->__soapCall("Perform", $perform, null, null , $out_header);
 		parent::__construct($return, $authStub->__getLastResponseHTTPCode());
 		print_r($return);
