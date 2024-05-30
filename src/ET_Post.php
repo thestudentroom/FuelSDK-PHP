@@ -37,6 +37,7 @@ class ET_Post extends ET_Constructor
 			$objects["Options"] = "";
 		}
 		$cr["CreateRequest"] = $objects;
+		$out_header = [];
 		$return = $authStub->__soapCall("Create", $cr, null, null , $out_header);
 		parent::__construct($return, $authStub->__getLastResponseHTTPCode());		
 		

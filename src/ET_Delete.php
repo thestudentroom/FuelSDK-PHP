@@ -27,6 +27,7 @@ class ET_Delete extends ET_Constructor
 		$objects["Options"] = "";
 		$cr["DeleteRequest"] = $objects;
 		
+		$out_header = [];
 		$return = $authStub->__soapCall("Delete", $cr, null, null , $out_header);
 		parent::__construct($return, $authStub->__getLastResponseHTTPCode());		
 		

@@ -75,6 +75,7 @@ class ET_Get extends ET_Constructor
 		$request["RetrieveRequest"] = $retrieveRequest;
 		$rrm["RetrieveRequestMsg"] = $request;
 		
+		$out_header = [];
 		$return = $authStub->__soapCall("Retrieve", $rrm, null, null , $out_header);
 		parent::__construct($return, $authStub->__getLastResponseHTTPCode());
 		

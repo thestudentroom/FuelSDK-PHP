@@ -33,6 +33,7 @@ class ET_Configure extends ET_Constructor
 		} 
 
 		$configure['ConfigureRequestMsg'] = $configureRequest;
+		$out_header = [];
 		$return = $authStub->__soapCall("Configure", $configure, null, null , $out_header);
 		parent::__construct($return, $authStub->__getLastResponseHTTPCode());
 		
