@@ -517,9 +517,10 @@ class ET_Client extends SoapClient
 	 * @param string $saction Soap action name
 	 * @param string $version Future use
 	 * @param integer $one_way Future use
+	 * @param string|null $uriParserClass Added to SoapClient::__doRequest() in PHP 8.5; passed through untouched
 	 * @return string Soap web service request result
 	 */			
-	function __doRequest($request, $location, $saction, $version, $one_way = 0): ?string
+	function __doRequest($request, $location, $saction, $version, $one_way = 0, $uriParserClass = null): ?string
 	{
 		$doc = new DOMDocument();
 		$doc->loadXML($request);
